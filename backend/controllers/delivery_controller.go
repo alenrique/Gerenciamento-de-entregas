@@ -70,7 +70,7 @@ func (c *DeliveryController) Create(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]interface{}{"id": id, "message": "Entrega cadastrada com sucesso!"})
+	json.NewEncoder(w).Encode(map[string]interface{}{"id": id, "message": "Entrega cadastrada com sucesso!", "success": true})
 }
 
 func (c *DeliveryController) List(w http.ResponseWriter, r *http.Request) {

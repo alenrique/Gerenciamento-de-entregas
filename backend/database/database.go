@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"log"
 	"os"
-	"path/filepath"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/joho/godotenv"
@@ -13,11 +12,8 @@ import (
 var DB *sql.DB
 
 func InitDB() {
-	// Obtém o caminho absoluto para o arquivo .env
-	envPath := filepath.Join("backend", ".env")
-
 	// Carrega as variáveis de ambiente do arquivo .env
-	if err := godotenv.Load(envPath); err != nil {
+	if err := godotenv.Load(".env"); err != nil {
 		log.Fatal("Erro ao carregar o arquivo .env")
 	}
 
