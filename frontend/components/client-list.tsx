@@ -120,10 +120,6 @@ export default function ClientList() {
           <h1 className="text-2xl font-bold text-gray-800">Clientes</h1>
           <p className="text-gray-500 mt-1">Gerencie todos os seus clientes em um só lugar</p>
         </div>
-        <button className="mt-4 md:mt-0 bg-teal-500 text-white px-4 py-2 rounded-md flex items-center">
-          <UserPlus size={18} className="mr-2" />
-          Novo Cliente
-        </button>
       </div>
 
       <Card className="mb-6">
@@ -150,16 +146,6 @@ export default function ClientList() {
                 <option value="pessoa física">Pessoa Física</option>
                 <option value="pessoa jurídica">Pessoa Jurídica</option>
               </select>
-            </div>
-            <div className="flex gap-2">
-              <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-md flex items-center">
-                <Download size={18} className="mr-1" />
-                Exportar
-              </button>
-              <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-md flex items-center">
-                <Upload size={18} className="mr-1" />
-                Importar
-              </button>
             </div>
           </div>
         </CardContent>

@@ -175,10 +175,10 @@ export default function EntregasList() {
           <h1 className="text-2xl font-bold text-gray-800">Entregas</h1>
           <p className="text-gray-500 mt-1">Gerencie todas as suas entregas em um só lugar</p>
         </div>
-        <button className="mt-4 md:mt-0 bg-teal-500 text-white px-4 py-2 rounded-md flex items-center">
+        <a href="/delivery_registration" className="mt-4 md:mt-0 bg-teal-500 text-white px-4 py-2 rounded-md flex items-center">
           <Plus size={18} className="mr-2" />
           Nova Entrega
-        </button>
+        </a>
       </div>
 
       <Card className="mb-6">
@@ -193,16 +193,6 @@ export default function EntregasList() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-            </div>
-            <div className="flex gap-2">
-              <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-md flex items-center">
-                <Download size={18} className="mr-1" />
-                Exportar
-              </button>
-              <button className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded-md flex items-center">
-                <Upload size={18} className="mr-1" />
-                Importar
-              </button>
             </div>
           </div>
         </CardContent>
