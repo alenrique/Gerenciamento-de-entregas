@@ -26,8 +26,8 @@ func InitDB() {
 	dbPort := os.Getenv("DB_PORT")         // Porta do banco de dados (ex: 3306)
 	dbName := os.Getenv("DB_NAME")         // Nome do banco de dados
 
-	// Monta a string de conexão com o banco de dados
-	connectionString := dbUser + ":" + dbPassword + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName
+	// Monta a string de conexão com o banco de dados, incluindo o charset utf8mb4
+	connectionString := dbUser + ":" + dbPassword + "@tcp(" + dbHost + ":" + dbPort + ")/" + dbName + "?charset=utf8mb4"
 
 	var err error
 	// Abre a conexão com o banco de dados usando o driver MySQL e a string de conexão

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Search, Filter, UserPlus, Edit, Trash2, Eye, Download, Upload, Loader } from "lucide-react"
+import { Search, Filter, Edit, Trash2, Eye, Loader } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import ClientDetailModal from "./client-detail-modal"
 // Adicionar o import do modal de edição
@@ -98,7 +98,7 @@ export default function ClientList() {
     if (window.confirm("Tem certeza que deseja excluir este cliente?")) {
       try {
         // Aqui você implementaria a chamada para excluir o cliente na API
-        const response = await fetch(`http://localhost:8080/clients/${id}`, {
+        await fetch(`http://localhost:8080/clients/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

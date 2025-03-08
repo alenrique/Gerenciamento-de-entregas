@@ -107,7 +107,6 @@ export default function ClientDetailModal({ client, isOpen, onClose }: ClientDet
           >
             Fechar
           </button>
-          <button className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600">Editar Cliente</button>
         </div>
       </div>
     </div>

@@ -76,9 +76,6 @@ export default function CitiesBarChart({ data }: CitiesBarChartProps) {
             ticks: {
               precision: 0,
             },
-            grid: {
-              borderDash: [2, 4],
-            },
           },
         },
       },

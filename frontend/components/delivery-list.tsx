@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Search, Plus, Download, Upload, Eye, Edit, Trash2, MapPin, Loader } from "lucide-react"
+import { Search, Plus, Eye, Edit, Trash2, MapPin, Loader } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import EntregaDetailModal from "./delivery-detail-modal"
 // Adicionar o import do modal de edição
@@ -153,7 +153,7 @@ export default function EntregasList() {
     if (window.confirm("Tem certeza que deseja excluir esta entrega?")) {
       try {
         // Aqui você implementaria a chamada para excluir a entrega na API
-        const response = await fetch(`http://localhost:8080/deliveries/${id}`, {
+        await fetch(`http://localhost:8080/deliveries/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

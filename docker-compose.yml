@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: deliveries
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db-scripts:/docker-entrypoint-initdb.d  # Monta os scripts SQL
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uuser", "-ppassword"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+
+  backend:
+    build: ./backend
+    container_name: golang_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy  # Só inicia quando o banco estiver pronto
+    environment:
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: deliveries
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_INITDB_SKIP_TZINFO: 1
+      character-set-server: utf8mb4
+      collation-server: utf8mb4_unicode_ci
+
+  frontend:
+    build: ./frontend
+    container_name: nextjs_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_started  # Só inicia depois do backend subir
+
+volumes:
+  mysql_data:

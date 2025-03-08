@@ -45,7 +45,6 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const [entregas, setEntregas] = useState<EntregaAPI[]>([])
   const [clientes, setClientes] = useState<ClienteAPI[]>([])
 
   const [cidadesData, setCidadesData] = useState<ChartData[]>([])
@@ -79,7 +78,6 @@ export default function Dashboard() {
           throw new Error("Falha ao buscar dados de entregas")
         }
         const entregasData: EntregaAPI[] = await entregasResponse.json()
-        setEntregas(entregasData)
 
         // Processar dados para os gráficos e estatísticas
         processarDados(entregasData)

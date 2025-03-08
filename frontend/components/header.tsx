@@ -1,8 +1,10 @@
+import Image from "next/image";
+
 export default function Header() {
   return (
     <header className="bg-teal-500 text-white p-3 shadow-md flex justify-between items-center">
       <div className="flex items-center">
-        <img src="logo.png" alt="Logo" className="w-32"/>
+        <Image src={"/logo.png"} alt="Logo" width={127} height={127}/>
       </div>
       <div className="flex items-center space-x-4">
         <button className="text-white hover:text-teal-100">

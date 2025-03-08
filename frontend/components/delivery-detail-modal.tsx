@@ -179,7 +179,6 @@ export default function EntregaDetailModal({ entrega, isOpen, onClose }: Entrega
           >
             Fechar
           </button>
-          <button className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-600">Editar Entrega</button>
         </div>
       </div>
     </div>

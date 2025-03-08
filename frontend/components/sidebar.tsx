@@ -2,16 +2,12 @@
 
 import {
   Home,
-  Calendar,
-  DollarSign,
   Users,
   Briefcase,
   FileText,
   PieChart,
-  Settings,
-  HelpCircle,
-  LogOut,
 } from "lucide-react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
@@ -29,7 +25,7 @@ export default function Sidebar() {
   return (
     <aside className="w-64 bg-gray-800 text-white hidden md:block">
       <div className="p-4 border-b border-gray-700">
-        <img src="logo.png" alt="Logo" className="w-32"/>
+        <Image src={"/logo.png"} alt="Logo" width={127} height={127} />
       </div>
       <nav className="mt-2">
         <ul>

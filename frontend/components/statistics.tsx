@@ -5,9 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { PieChart, BarChart, MapPin, Package, Loader } from "lucide-react"
-import StatusPieChart from "./charts/status-pie-chart"
-import CitiesBarChart from "./charts/cities-bar-chart"
+import { MapPin, Loader } from "lucide-react"
 
 // Interfaces para os dados da API
 interface ClienteAPI {
@@ -41,7 +39,6 @@ interface ChartData {
 }
 
 export default function Statistics() {
-  const [isClient, setIsClient] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -51,14 +48,7 @@ export default function Statistics() {
   const [cidadesData, setCidadesData] = useState<ChartData[]>([])
   const [estadosData, setEstadosData] = useState<ChartData[]>([])
 
-  // Estatísticas
-  const [estatisticas, setEstatisticas] = useState({
-    totalEntregas: 0,
-    pesoMedio: 0,
-  })
-
   useEffect(() => {
-    setIsClient(true)
 
     const fetchData = async () => {
       setIsLoading(true)
@@ -96,15 +86,6 @@ export default function Statistics() {
 
   // Processar dados para os gráficos e estatísticas
   const processarDados = (entregas: EntregaAPI[]) => {
-    // Calcular estatísticas gerais
-    const totalEntregas = entregas.length
-    const pesoTotal = entregas.reduce((acc, entrega) => acc + entrega.peso, 0)
-    const pesoMedio = totalEntregas > 0 ? Number((pesoTotal / totalEntregas).toFixed(1)) : 0
-
-    setEstatisticas({
-      totalEntregas,
-      pesoMedio,
-    })
 
     // Processar dados para o gráfico de cidades
     const cidadesCount: Record<string, number> = {}
@@ -133,27 +114,6 @@ export default function Statistics() {
 
     setEstadosData(estadosArray)
   }
-
-  // Cores para o gráfico de estados
-  const estadosCores = [
-    "#10b981", // verde
-    "#3b82f6", // azul
-    "#f59e0b", // âmbar
-    "#8b5cf6", // roxo
-    "#ec4899", // rosa
-    "#ef4444", // vermelho
-    "#06b6d4", // ciano
-    "#6366f1", // índigo
-    "#84cc16", // verde-limão
-    "#14b8a6", // verde-azulado
-  ]
-
-  // Formatar dados para o gráfico de estados
-  const estadosChartData = estadosData.map((item, index) => ({
-    status: item.label,
-    count: item.value,
-    color: estadosCores[index % estadosCores.length],
-  }))
 
   return (
     <div className="flex-1 space-y-4 p-4 md:p-8">
@@ -197,7 +157,6 @@ export default function Statistics() {
                   <CardContent>
                     <div className="space-y-4">
                       {entregas.slice(0, 5).map((entrega) => {
-                        const cliente = clientes.find((c) => c.id === entrega.cliente_id)
                         return (
                           <div key={entrega.id} className="flex items-center">
                             <div className="mr-2 h-2 w-2 rounded-full bg-blue-500" />
@@ -262,27 +221,6 @@ export default function Statistics() {
         </TabsContent>
       </Tabs>
     </div>
-  )
-}
-
-// Componente User para o ícone de usuário
-function User(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-      <circle cx="12" cy="7" r="4" />
-    </svg>
   )
 }
 
