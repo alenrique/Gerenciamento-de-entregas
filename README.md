@@ -72,7 +72,7 @@ O projeto foi containerizado utilizando Docker, com containers separados para o 
    git clone https://github.com/alenrique/Gerenciamento-de-entregas.git
 2. Navegue até a pasta do projeto:
    ```bash
-   cd Gerenciamento\ de\ entregas/
+   cd Gerenciamento-de-entregas/
 3. Execute o Docker Compose para subir os containers:
    ```bash
    sudo docker-compose up --build
