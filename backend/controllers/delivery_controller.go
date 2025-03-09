@@ -15,7 +15,17 @@ type DeliveryController struct {
 	Service *services.DeliveryService // Serviço que contém a lógica de negócio para entregas
 }
 
-// Create lida com a requisição para criar uma nova entrega.
+// Create godoc
+// @Summary Cria uma nova entrega
+// @Description Cria uma nova entrega associada a um cliente.
+// @Accept json
+// @Produce json
+// @Param delivery body models.Delivery true "Dados da entrega"
+// @Param cliente body models.Cliente true "Dados do cliente"
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /deliveries [post]
 func (c *DeliveryController) Create(w http.ResponseWriter, r *http.Request) {
 	var request struct {
 		Delivery models.Delivery `json:"delivery"` // Dados da entrega
@@ -78,7 +88,13 @@ func (c *DeliveryController) Create(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]interface{}{"id": id, "message": "Entrega cadastrada com sucesso!", "success": true})
 }
 
-// List lida com a requisição para listar todas as entregas.
+// List godoc
+// @Summary Lista todas as entregas
+// @Description Retorna uma lista de todas as entregas cadastradas.
+// @Produce json
+// @Success 200 {array} models.Delivery
+// @Failure 500 {object} map[string]string
+// @Router /deliveries [get]
 func (c *DeliveryController) List(w http.ResponseWriter, r *http.Request) {
 	// Chama o serviço para obter a lista de entregas
 	deliveries, err := c.Service.List()
@@ -92,7 +108,16 @@ func (c *DeliveryController) List(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(deliveries)
 }
 
-// FindByID lida com a requisição para buscar uma entrega pelo ID.
+// FindByID godoc
+// @Summary Busca uma entrega pelo ID
+// @Description Retorna os detalhes de uma entrega específica com base no ID.
+// @Produce json
+// @Param id path int true "ID da entrega"
+// @Success 200 {object} models.Delivery
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /deliveries/id/{id} [get]
 func (c *DeliveryController) FindByID(w http.ResponseWriter, r *http.Request) {
 	// Extrai o ID da URL (ex: "/deliveries/id/1" -> "1")
 	id, err := strconv.Atoi(r.URL.Path[len("/deliveries/id/"):])
@@ -121,7 +146,15 @@ func (c *DeliveryController) FindByID(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(delivery)
 }
 
-// FindByCity lida com a requisição para buscar entregas por cidade.
+// FindByCity godoc
+// @Summary Busca entregas por cidade
+// @Description Retorna uma lista de entregas filtradas por cidade.
+// @Produce json
+// @Param cidade query string true "Nome da cidade"
+// @Success 200 {array} models.Delivery
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /deliveries/city [get]
 func (c *DeliveryController) FindByCity(w http.ResponseWriter, r *http.Request) {
 	// Extrai o parâmetro "cidade" da query string
 	cidade := r.URL.Query().Get("cidade")
@@ -144,7 +177,17 @@ func (c *DeliveryController) FindByCity(w http.ResponseWriter, r *http.Request) 
 	json.NewEncoder(w).Encode(deliveries)
 }
 
-// Update lida com a requisição para atualizar uma entrega existente.
+// Update godoc
+// @Summary Atualiza uma entrega
+// @Description Atualiza os dados de uma entrega existente.
+// @Accept json
+// @Produce json
+// @Param id path int true "ID da entrega"
+// @Param delivery body models.Delivery true "Dados da entrega"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /deliveries/{id} [put]
 func (c *DeliveryController) Update(w http.ResponseWriter, r *http.Request) {
 	// Extrai o ID da URL (ex: "/deliveries/1" -> "1")
 	id, err := strconv.Atoi(r.URL.Path[len("/deliveries/"):])
@@ -171,7 +214,15 @@ func (c *DeliveryController) Update(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(map[string]string{"message": "Entrega atualizada com sucesso!"})
 }
 
-// Delete lida com a requisição para deletar uma entrega pelo ID.
+// Delete godoc
+// @Summary Exclui uma entrega
+// @Description Exclui uma entrega pelo ID.
+// @Produce json
+// @Param id path int true "ID da entrega"
+// @Success 200 {object} map[string]string
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /deliveries/{id} [delete]
 func (c *DeliveryController) Delete(w http.ResponseWriter, r *http.Request) {
 	// Extrai o ID da URL (ex: "/deliveries/1" -> "1")
 	id, err := strconv.Atoi(r.URL.Path[len("/deliveries/"):])

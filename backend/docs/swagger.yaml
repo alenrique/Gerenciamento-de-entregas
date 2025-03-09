@@ -1,0 +1,400 @@
+definitions:
+  models.Cliente:
+    properties:
+      cpf:
+        description: 'CPF do cliente (formato: 123.456.789-00)'
+        type: string
+      email:
+        description: Endereço de e-mail do cliente
+        type: string
+      id:
+        description: ID único do cliente
+        type: integer
+      nome:
+        description: Nome completo do cliente
+        type: string
+      telefone:
+        description: Número de telefone do cliente
+        type: string
+    type: object
+  models.Delivery:
+    properties:
+      bairro:
+        description: Bairro do endereço
+        type: string
+      cidade:
+        description: Cidade do endereço
+        type: string
+      cliente_id:
+        description: ID do cliente associado à entrega
+        type: integer
+      complemento:
+        description: 'Complemento do endereço (ex: apartamento, bloco)'
+        type: string
+      endereco:
+        description: Endereço completo da entrega
+        type: string
+      estado:
+        description: Estado (UF) do endereço
+        type: string
+      id:
+        description: ID único da entrega
+        type: integer
+      latitude:
+        description: Latitude da localização da entrega
+        type: number
+      logradouro:
+        description: Nome da rua, avenida, etc.
+        type: string
+      longitude:
+        description: Longitude da localização da entrega
+        type: number
+      numero:
+        description: Número do endereço
+        type: string
+      pais:
+        description: País do endereço
+        type: string
+      peso:
+        description: Peso da entrega (em kg)
+        type: number
+    type: object
+info:
+  contact: {}
+paths:
+  /clients:
+    get:
+      description: Retorna uma lista de todos os clientes cadastrados.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Cliente'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Lista todos os clientes
+    post:
+      consumes:
+      - application/json
+      description: Cria um novo cliente no sistema.
+      parameters:
+      - description: Dados do cliente
+        in: body
+        name: cliente
+        required: true
+        schema:
+          $ref: '#/definitions/models.Cliente'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Cliente'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Cria um novo cliente
+    put:
+      consumes:
+      - application/json
+      description: Atualiza os dados de um cliente existente.
+      parameters:
+      - description: Dados do cliente
+        in: body
+        name: cliente
+        required: true
+        schema:
+          $ref: '#/definitions/models.Cliente'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Cliente'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Atualiza um cliente
+  /clients/{id}:
+    delete:
+      description: Exclui um cliente pelo ID.
+      parameters:
+      - description: ID do cliente
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Exclui um cliente
+  /clients/id/{id}:
+    get:
+      description: Retorna os detalhes de um cliente específico com base no ID.
+      parameters:
+      - description: ID do cliente
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Cliente'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Busca um cliente pelo ID
+  /deliveries:
+    get:
+      description: Retorna uma lista de todas as entregas cadastradas.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Delivery'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Lista todas as entregas
+    post:
+      consumes:
+      - application/json
+      description: Cria uma nova entrega associada a um cliente.
+      parameters:
+      - description: Dados da entrega
+        in: body
+        name: delivery
+        required: true
+        schema:
+          $ref: '#/definitions/models.Delivery'
+      - description: Dados do cliente
+        in: body
+        name: cliente
+        required: true
+        schema:
+          $ref: '#/definitions/models.Cliente'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Cria uma nova entrega
+  /deliveries/{id}:
+    delete:
+      description: Exclui uma entrega pelo ID.
+      parameters:
+      - description: ID da entrega
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Exclui uma entrega
+    put:
+      consumes:
+      - application/json
+      description: Atualiza os dados de uma entrega existente.
+      parameters:
+      - description: ID da entrega
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Dados da entrega
+        in: body
+        name: delivery
+        required: true
+        schema:
+          $ref: '#/definitions/models.Delivery'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Atualiza uma entrega
+  /deliveries/city:
+    get:
+      description: Retorna uma lista de entregas filtradas por cidade.
+      parameters:
+      - description: Nome da cidade
+        in: query
+        name: cidade
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Delivery'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Busca entregas por cidade
+  /deliveries/id/{id}:
+    get:
+      description: Retorna os detalhes de uma entrega específica com base no ID.
+      parameters:
+      - description: ID da entrega
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Delivery'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Busca uma entrega pelo ID
+swagger: "2.0"

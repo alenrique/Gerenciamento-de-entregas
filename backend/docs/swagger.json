@@ -1,0 +1,599 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/clients": {
+            "get": {
+                "description": "Retorna uma lista de todos os clientes cadastrados.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Lista todos os clientes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Cliente"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Atualiza os dados de um cliente existente.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Atualiza um cliente",
+                "parameters": [
+                    {
+                        "description": "Dados do cliente",
+                        "name": "cliente",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Cliente"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Cliente"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Cria um novo cliente no sistema.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Cria um novo cliente",
+                "parameters": [
+                    {
+                        "description": "Dados do cliente",
+                        "name": "cliente",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Cliente"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Cliente"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/clients/id/{id}": {
+            "get": {
+                "description": "Retorna os detalhes de um cliente específico com base no ID.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Busca um cliente pelo ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID do cliente",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Cliente"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/clients/{id}": {
+            "delete": {
+                "description": "Exclui um cliente pelo ID.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Exclui um cliente",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID do cliente",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deliveries": {
+            "get": {
+                "description": "Retorna uma lista de todas as entregas cadastradas.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Lista todas as entregas",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Delivery"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Cria uma nova entrega associada a um cliente.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Cria uma nova entrega",
+                "parameters": [
+                    {
+                        "description": "Dados da entrega",
+                        "name": "delivery",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Delivery"
+                        }
+                    },
+                    {
+                        "description": "Dados do cliente",
+                        "name": "cliente",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Cliente"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deliveries/city": {
+            "get": {
+                "description": "Retorna uma lista de entregas filtradas por cidade.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Busca entregas por cidade",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Nome da cidade",
+                        "name": "cidade",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Delivery"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deliveries/id/{id}": {
+            "get": {
+                "description": "Retorna os detalhes de uma entrega específica com base no ID.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Busca uma entrega pelo ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID da entrega",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Delivery"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/deliveries/{id}": {
+            "put": {
+                "description": "Atualiza os dados de uma entrega existente.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Atualiza uma entrega",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID da entrega",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Dados da entrega",
+                        "name": "delivery",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Delivery"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Exclui uma entrega pelo ID.",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Exclui uma entrega",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID da entrega",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Cliente": {
+            "type": "object",
+            "properties": {
+                "cpf": {
+                    "description": "CPF do cliente (formato: 123.456.789-00)",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "Endereço de e-mail do cliente",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID único do cliente",
+                    "type": "integer"
+                },
+                "nome": {
+                    "description": "Nome completo do cliente",
+                    "type": "string"
+                },
+                "telefone": {
+                    "description": "Número de telefone do cliente",
+                    "type": "string"
+                }
+            }
+        },
+        "models.Delivery": {
+            "type": "object",
+            "properties": {
+                "bairro": {
+                    "description": "Bairro do endereço",
+                    "type": "string"
+                },
+                "cidade": {
+                    "description": "Cidade do endereço",
+                    "type": "string"
+                },
+                "cliente_id": {
+                    "description": "ID do cliente associado à entrega",
+                    "type": "integer"
+                },
+                "complemento": {
+                    "description": "Complemento do endereço (ex: apartamento, bloco)",
+                    "type": "string"
+                },
+                "endereco": {
+                    "description": "Endereço completo da entrega",
+                    "type": "string"
+                },
+                "estado": {
+                    "description": "Estado (UF) do endereço",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID único da entrega",
+                    "type": "integer"
+                },
+                "latitude": {
+                    "description": "Latitude da localização da entrega",
+                    "type": "number"
+                },
+                "logradouro": {
+                    "description": "Nome da rua, avenida, etc.",
+                    "type": "string"
+                },
+                "longitude": {
+                    "description": "Longitude da localização da entrega",
+                    "type": "number"
+                },
+                "numero": {
+                    "description": "Número do endereço",
+                    "type": "string"
+                },
+                "pais": {
+                    "description": "País do endereço",
+                    "type": "string"
+                },
+                "peso": {
+                    "description": "Peso da entrega (em kg)",
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

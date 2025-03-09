@@ -14,7 +14,16 @@ type ClientController struct {
 	Service *services.ClientService // Serviço que contém a lógica de negócio para clientes
 }
 
-// Create lida com a requisição para criar um novo cliente.
+// Create godoc
+// @Summary Cria um novo cliente
+// @Description Cria um novo cliente no sistema.
+// @Accept json
+// @Produce json
+// @Param cliente body models.Cliente true "Dados do cliente"
+// @Success 201 {object} models.Cliente
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /clients [post]
 func (controller *ClientController) Create(w http.ResponseWriter, r *http.Request) {
 	var client models.Cliente
 
@@ -35,7 +44,13 @@ func (controller *ClientController) Create(w http.ResponseWriter, r *http.Reques
 	json.NewEncoder(w).Encode(client)
 }
 
-// List lida com a requisição para listar todos os clientes.
+// List godoc
+// @Summary Lista todos os clientes
+// @Description Retorna uma lista de todos os clientes cadastrados.
+// @Produce json
+// @Success 200 {array} models.Cliente
+// @Failure 500 {object} map[string]string
+// @Router /clients [get]
 func (controller *ClientController) List(w http.ResponseWriter, r *http.Request) {
 	// Chama o serviço para obter a lista de clientes
 	clients, err := controller.Service.List()
@@ -49,7 +64,16 @@ func (controller *ClientController) List(w http.ResponseWriter, r *http.Request)
 	json.NewEncoder(w).Encode(clients)
 }
 
-// FindByID lida com a requisição para buscar um cliente pelo ID.
+// FindByID godoc
+// @Summary Busca um cliente pelo ID
+// @Description Retorna os detalhes de um cliente específico com base no ID.
+// @Produce json
+// @Param id path int true "ID do cliente"
+// @Success 200 {object} models.Cliente
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /clients/id/{id} [get]
 func (controller *ClientController) FindByID(w http.ResponseWriter, r *http.Request) {
 	// Extrai o ID da URL (ex: "/clients/id/1" -> "1")
 	idStr := r.URL.Path[len("/clients/id/"):]
@@ -71,7 +95,16 @@ func (controller *ClientController) FindByID(w http.ResponseWriter, r *http.Requ
 	json.NewEncoder(w).Encode(client)
 }
 
-// Update lida com a requisição para atualizar um cliente existente.
+// Update godoc
+// @Summary Atualiza um cliente
+// @Description Atualiza os dados de um cliente existente.
+// @Accept json
+// @Produce json
+// @Param cliente body models.Cliente true "Dados do cliente"
+// @Success 200 {object} models.Cliente
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /clients [put]
 func (controller *ClientController) Update(w http.ResponseWriter, r *http.Request) {
 	var client models.Cliente
 
@@ -92,7 +125,15 @@ func (controller *ClientController) Update(w http.ResponseWriter, r *http.Reques
 	json.NewEncoder(w).Encode(client)
 }
 
-// Delete lida com a requisição para deletar um cliente pelo ID.
+// Delete godoc
+// @Summary Exclui um cliente
+// @Description Exclui um cliente pelo ID.
+// @Produce json
+// @Param id path int true "ID do cliente"
+// @Success 204 "No Content"
+// @Failure 400 {object} map[string]string
+// @Failure 500 {object} map[string]string
+// @Router /clients/{id} [delete]
 func (controller *ClientController) Delete(w http.ResponseWriter, r *http.Request) {
 	// Extrai o ID da URL (ex: "/clients/1" -> "1")
 	idStr := r.URL.Path[len("/clients/"):]
