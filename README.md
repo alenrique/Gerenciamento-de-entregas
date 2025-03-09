@@ -65,7 +65,7 @@ O projeto foi containerizado utilizando Docker, com containers separados para o 
    ```bash
    http://localhost:8080/swagger
 
-## Como Executar o Projeto (Docker)
+## Como Executar o Projeto - Docker (Recomendado)
 
 1. Clone o repositório:
    ```bash
@@ -93,7 +93,7 @@ A documentação do preparo antes de iniciar o código foi feita em LaTEX pelo O
 
 ## Documentação Adicional
 
-Para mais detalhes sobre a arquitetura, decisões de design e bibliotecas utilizadas, consulte o arquivo COMMENTS.md.
+Para mais detalhes sobre a arquitetura, decisões de design e bibliotecas utilizadas, consulte o arquivo [COMMENTS.md](https://github.com/alenrique/Gerenciamento-de-entregas/blob/main/COMMENTS.md).
 
 ## Quadro Kanban (Trello)
 
